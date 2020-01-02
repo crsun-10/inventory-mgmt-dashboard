@@ -1,0 +1,46 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+            style="display:flex;justify-content: space-between;">
+            <span class="dialog-title">{{_data.currentItem.name}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div mat-dialog-content class="p-24 pb-0 m-0 ss-input-div" fusePerfectScrollbar>
+        <mat-form-field class="w-100-p">
+            <!-- <input matInput placeholder="New name" [formControl]="FormControl"> -->
+            <input matInput placeholder="Nama baru" [formControl]="FormControl">
+        </mat-form-field>
+        <div class="err-msg-div mb-12">
+            <div class="message-box warning" *ngIf="isEmptyName">
+                <!-- Please input new name! -->
+                Nama tidak boleh kosong
+            </div>
+            <div class="message-box warning" *ngIf="isExistName">
+                <!-- The name is aleardy exist! Try again! -->
+                Nama telah dipakai
+            </div>
+            <div class="message-box warning" *ngIf="isBarcodeName">
+                <!-- Can't be same name with barcode! Try again! -->
+                Nama tidak boleh sama dengan kode barcode
+            </div>
+            <div class="message-box warning" *ngIf="isInvalidName">
+                Can't be include underline( _ )! Try again!
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16 ss-btn-group" fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button class="mr-8" color="primary" (click)="matDialogRef.close(['close'])">
+            <!-- Close -->
+            Batal
+        </button>
+
+        <button mat-raised-button class="mr-8" color="accent" (click)="onClickRename()" [disabled]="!FormControl.valid">
+            <!-- Rename -->
+            Ubah
+        </button>
+    </div>
+</div>

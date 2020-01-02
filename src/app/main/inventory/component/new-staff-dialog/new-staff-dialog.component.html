@@ -1,0 +1,55 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+            style="display: flex;justify-content: space-between;">
+            <!-- <span class="title dialog-title">New Staff</span> -->
+            <span class="title dialog-title">Karyawan Baru</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+        <form class="example-form" class="w-100-p">
+            <mat-form-field class="w-100-p">
+                <input matInput placeholder="Email" [formControl]="emailFormControl">
+                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Please enter a valid email
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email is required
+                </mat-error>
+            </mat-form-field>
+        </form>
+
+        <div class="message-box warning" *ngIf="isSelfEmail">
+            That is your email!
+        </div>
+        <div class="message-box warning" *ngIf="isNotExistEmail">
+            <!-- The email is not exist! -->
+            Email tidak ditemukan. Pastikan pengguna terdaftar
+        </div>
+        <div class="message-box warning" *ngIf="isAlreadyEmployeed">
+            Already employed!
+        </div>
+        <div class="message-box warning" *ngIf="isAlreadyInvited">
+            Already invited!
+        </div>
+
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="center center"
+        style="display:flex;justify-content: space-between;">
+        <button mat-raised-button class="mr-8" color="primary" (click)="matDialogRef.close(['cancel'])">
+            <!-- Cancel -->
+            Batal
+        </button>
+
+        <button mat-raised-button class="mr-8" color="accent" (click)="onclickAdd()"
+            [disabled]="!emailFormControl.valid">
+            <!-- Add -->
+            Tambah
+        </button>
+    </div>
+</div>

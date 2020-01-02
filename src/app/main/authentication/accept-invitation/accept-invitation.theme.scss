@@ -1,0 +1,35 @@
+@mixin accept-invitation-theme($theme) {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+    $accent: map-get($theme, accent);
+    $is-dark: map-get($theme, is-dark);
+
+    accept-invitation {
+        #accept-invitation {
+            #accept-invitation-intro {
+                color: white;
+            }
+
+            #accept-invitation-form-wrapper {
+                @if ($is-dark) {
+                    background: mat-color($fuse-navy, 600);
+                } @else {
+                    background: map-get($background, card);
+                }
+
+                #accept-invitation-form {
+                    .separator {
+                        color: map-get($foreground, divider);
+
+                        .text {
+                            &:before,
+                            &:after {
+                                border-top-color: map-get($foreground, divider);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

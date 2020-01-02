@@ -1,0 +1,55 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+            style="display:flex;justify-content: space-between;">
+            <span class="dialog-title">Verify items</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div mat-dialog-content class="w-100-p m-0 p-0" fusePerfectScrollbar>
+        <div *ngFor="let item of _data.items; let i = index" class="item-div p-24 w-100-p">
+            <div class="barcode-div mb-8">
+                Barcode: <span class="text-bold">{{item.scanResults}}</span>
+            </div>
+            <div class="item-content">
+                <!-- <img class="item-img"> -->
+                <blockquote class="reverse py-4 pl-4">
+                    <p>
+                        {{item.img.slice(item.img.indexOf('_') + 1)}}
+                    </p>
+                    <footer>
+                        {{item.img.split('_')[0]}}
+                    </footer>
+                </blockquote>
+                <!-- <div class="item-right"> -->
+                <div>
+                    <mat-form-field class="w-100-p">
+                        <input matInput placeholder="New name" [formControl]="nameFormControl[i]">
+                    </mat-form-field>
+                    <div class="message-box warning" *ngIf="isEmptyName[i]">
+                        <!-- Required field! -->
+                        Kolom yang harus diisi
+                    </div>
+                    <div class="message-box warning" *ngIf="isExistName[i]">
+                        <!-- Exist name! Retry! -->
+                        Nama telah dipakai
+                    </div>
+                    <div class="message-box warning" *ngIf="isBarcodeName[i]">
+                        <!-- Can't be same with barcode! -->
+                        Nama tidak boleh sama dengan kode barcode
+                    </div>
+                    <div class="message-box warning" *ngIf="isInvalidName[i]">
+                        Can't include underline ( _ )!
+                    </div>
+                    <div class="btn-rename">
+                        <button mat-raised-button class="mr-8" color="accent" (click)="onRename(item, i)">
+                            Rename
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

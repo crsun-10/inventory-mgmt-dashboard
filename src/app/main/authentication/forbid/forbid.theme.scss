@@ -1,0 +1,18 @@
+@mixin forbid-theme($theme) {
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    forbid {
+        #forbid {
+            #forbid-form-wrapper {
+                #forbid-form {
+                    background: map-get($background, card);
+
+                    .subtitle {
+                        color: map-get($foreground, secondary-text);
+                    }
+                }
+            }
+        }
+    }
+}

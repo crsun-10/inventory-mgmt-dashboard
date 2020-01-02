@@ -1,0 +1,97 @@
+<div id="verify-confirm" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
+
+    <div id="verify-confirm-intro" fxFlex fxHide fxShow.gt-xs>
+
+        <!-- <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
+            <img src="assets/images/logos/fuse.svg">
+        </div> -->
+
+        <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+            <!-- Welcome to the Antara Packer! -->
+            Kelola packing jadi mudah, akurat, dan terukur
+        </div>
+
+        <div class="description" [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+            <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
+            vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra. -->
+        </div>
+
+    </div>
+
+    <div id="verify-confirm-form-wrapper" fusePerfectScrollbar [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
+
+        <div id="verify-confirm-form">
+
+            <!-- <div class="logo" fxHide.gt-xs>
+                <img src="assets/images/logos/fuse.svg">
+            </div> -->
+
+            <div class="title">
+                <!-- {{ 'VERIFY_CONFIRMATION.TITLE' | translate | uppercase}} -->
+                <!-- VERIFY CONFIRM -->
+                Konfirmasi Kode Verifikasi
+            </div>
+
+            <form name="VerifyConfirmForm" [formGroup]="VerifyConfirmForm" novalidate #f="ngForm">
+                <!-- <mat-form-field appearance="inline">
+                    <input matInput placeholder="Input" style="display: none">
+                    <mat-radio-group aria-label="Select an option" fromControlName="verifyType" labelPosition="after"
+                        [value]="verifyType" (change)="onChangeVerifyType($event)">
+                        <mat-radio-button value="email">
+                            {{ 'VERIFY_CONFIRMATION.EMAIL' | translate}}
+                        </mat-radio-button>
+                        <mat-radio-button value="phone">
+                            {{ 'VERIFY_CONFIRMATION.PHONE' | translate}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </mat-form-field> -->
+                <mat-form-field appearance="outline">
+                    <mat-label>
+                        {{verifyType | translate}}
+                    </mat-label>
+                    <input matInput formControlName="emailphone" readonly [(ngModel)]="emailphone">
+                    <mat-icon matSuffix class="secondary-text">
+                        {{verifyType == 'email' ? 'account_circle' : 'phone'}}
+                    </mat-icon>
+                </mat-form-field>
+                <button mat-button mat-raised-button color="accent" class="submit-button" aria-label="Send code"
+                    (click)="onSendVerifyCode()">
+                    <!-- {{isSendingVerifyCode ? ('VERIFY_CONFIRMATION.SENDING' | translate) : ('VERIFY_CONFIRMATION.SEND_VERIFY_CODE' | translate)}} -->
+                    <!-- {{isSendingVerifyCode ? ('Sending' | translate) : ('Send verify code' | translate)}} -->
+                    {{isSendingVerifyCode ? ('Sending' | translate) : ('Kirim kode verifikasi' | translate)}}
+                </button>
+                <mat-form-field appearance="inline">
+                    <input matInput placeholder="Input" style="display: none">
+                    <mat-divider></mat-divider>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" *ngIf="isSentVerifyCode">
+                    <mat-label>
+                        <!-- {{ 'VERIFY_CONFIRMATION.VERIFY_CODE' | translate}} -->
+                        <!-- verify code -->
+                        Kode verifikasi
+                    </mat-label>
+                    <input matInput formControlName="verifyCode" [(ngModel)]="verifyCode">
+                    <mat-icon matSuffix class="secondary-text">edit_circle</mat-icon>
+                </mat-form-field>
+                <button mat-button mat-raised-button color="accent" class="submit-button" aria-label="Send code"
+                    *ngIf="isSentVerifyCode" [disabled]="!verifyCode" (click)="onCheckVerifyCode()">
+                    <!-- {{isCheckingVerifyCode ? ('VERIFY_CONFIRMATION.CHECKING' | translate) : ( 'VERIFY_CONFIRMATION.CHECK_YOUR_CODE' | translate)}} -->
+                    <!-- {{isCheckingVerifyCode ? ('Checking' | translate) : ( 'Check your code' | translate)}} -->
+                    {{isCheckingVerifyCode ? ('Checking' | translate) : ( 'Konfirmasi' | translate)}}
+                </button>
+                <mat-form-field appearance="inline" *ngIf="isSentVerifyCode">
+                    <input matInput placeholder="Input" style="display: none">
+                    <mat-divider></mat-divider>
+                </mat-form-field>
+
+                <button mat-button mat-raised-button color="accent" class="submit-button" aria-label="Finish"
+                    *ngIf="isCheckedVerifyCode" (click)="onFinishVerifyCode()">
+                    <!-- {{ 'VERIFY_CONFIRMATION.FINISH' | translate | uppercase}} -->
+                    <!-- Finish -->
+                    Selesai
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

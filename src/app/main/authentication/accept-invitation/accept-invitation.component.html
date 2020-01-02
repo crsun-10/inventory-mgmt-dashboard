@@ -1,0 +1,87 @@
+<div id="accept-invitation" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
+
+    <div id="accept-invitation-intro" fxFlex fxHide fxShow.gt-xs>
+
+        <!-- <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
+            <img src="assets/images/logos/fuse.svg">
+        </div> -->
+
+        <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+            <!-- Welcome to the Antara Packer! -->
+            Kelola packing jadi mudah, akurat, dan terukur
+        </div>
+
+        <div class="description" [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+            <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
+                vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra. -->
+        </div>
+
+    </div>
+
+    <div id="accept-invitation-form-wrapper" fusePerfectScrollbar
+        [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
+
+        <div id="accept-invitation-form">
+
+            <div class="logo" fxHide.gt-xs>
+                <img src="assets/images/logos/fuse.svg">
+            </div>
+
+            <div class="title">INVITATION</div>
+            <div *ngIf="authService.isAuthenticated()">
+                <button type="button" mat-raised-button color="accent" class="submit-button mr-20"
+                    (click)="acceptInvitation()">
+                    Accept
+                </button>
+                <button type="button" mat-raised-button color="accent" class="submit-button"
+                    (click)="rejectInvitation()">
+                    Reject
+                </button>
+            </div>
+            <form *ngIf="!authService.isAuthenticated()" name="acceptInvitationForm" [formGroup]="acceptInvitationForm"
+                novalidate>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>
+                        <!-- {{ 'LOGIN.EMAIL' | translate}} -->
+                        Email
+                    </mat-label>
+                    <input matInput formControlName="email">
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error *ngIf="acceptInvitationForm.get('email').hasError('required')">
+                        <!-- {{ 'LOGIN.ERROR.REQUIRE_EMAIL' | translate}} -->
+                        Required email!
+                    </mat-error>
+                    <mat-error *ngIf="acceptInvitationForm.get('email').hasError('email')">
+                        <!-- {{ 'FORGOT_PASSWORD.INVALID_EMAIL' | translate}} -->
+                        Invalid email!
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>
+                        <!-- {{ 'LOGIN.PASSWORD' | translate}} -->
+                        Password
+                    </mat-label>
+                    <input matInput type="password" formControlName="password">
+                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <mat-error>
+                        <!-- {{ 'LOGIN.ERROR.REQUIRE_PASSWORD' | translate}} -->
+                        Required password!
+                    </mat-error>
+                </mat-form-field>
+                <button type="button" mat-raised-button color="accent" class="submit-button"
+                    [disabled]="acceptInvitationForm.invalid" (click)="loginAndProcess('accept')">
+                    <!-- {{ 'LOGIN.LOGIN' | translate | uppercase}} -->
+                    Accept
+                </button>
+                <button type="button" mat-raised-button color="accent" class="submit-button"
+                    [disabled]="acceptInvitationForm.invalid" (click)="loginAndProcess('reject')">
+                    <!-- {{ 'LOGIN.LOGIN' | translate | uppercase}} -->
+                    Reject
+                </button>
+
+            </form>
+        </div>
+    </div>
+</div>

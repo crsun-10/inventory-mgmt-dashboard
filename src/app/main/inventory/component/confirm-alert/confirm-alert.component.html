@@ -1,0 +1,27 @@
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center"
+            style="display:flex;justify-content: space-between;">
+            <span class="title dialog-title">Confirm</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+        <p class="text-center">
+            Are you really remove?
+        </p>
+    </div>
+
+    <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="center center"
+        style="display:flex;justify-content:space-between">
+        <button mat-raised-button class="mr-8" color="warn" (click)="matDialogRef.close(['okay'])">
+            Okay
+        </button>
+
+        <button mat-raised-button class="mr-8" color="accent" (click)="matDialogRef.close(['cancel'])">
+            Cancel
+        </button>
+    </div>
+</div>

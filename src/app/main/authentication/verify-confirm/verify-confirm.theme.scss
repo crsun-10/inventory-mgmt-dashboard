@@ -1,0 +1,35 @@
+@mixin verify-confirm-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $accent: map-get($theme, accent);
+  $is-dark: map-get($theme, is-dark);
+
+  verify-confirm {
+    #verify-confirm {
+      #verify-confirm-intro {
+        color: white;
+      }
+
+      #verify-confirm-form-wrapper {
+        @if ($is-dark) {
+          background: mat-color($fuse-navy, 600);
+        } @else {
+          background: map-get($background, card);
+        }
+
+        #verify-confirm-form {
+          .separator {
+            color: map-get($foreground, divider);
+
+            .text {
+              &:before,
+              &:after {
+                border-top-color: map-get($foreground, divider);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

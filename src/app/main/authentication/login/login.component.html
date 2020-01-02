@@ -1,0 +1,121 @@
+<div id="login" class="inner-scroll" fxLayout="row" fxLayoutAlign="start">
+
+    <div id="login-intro" fxFlex fxHide fxShow.gt-xs>
+
+        <!-- <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
+            <img src="assets/images/logos/fuse.svg">
+        </div> -->
+
+        <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+            <!-- Welcome to the Antara Packer! -->
+            Kelola packing jadi mudah, akurat, dan terukur
+        </div>
+
+        <div class="description" [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+            <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
+            vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra. -->
+        </div>
+
+    </div>
+
+    <div id="login-form-wrapper" fusePerfectScrollbar [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
+
+        <div id="login-form">
+
+            <!-- <div class="logo" fxHide.gt-xs>
+                <img src="assets/images/logos/fuse.svg">
+            </div> -->
+
+            <!-- <div class="title">Sign in</div> -->
+            <div class="title">Masuk</div>
+
+            <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>
+                        <!-- {{ 'LOGIN.EMAIL' | translate}} -->
+                        Email
+                    </mat-label>
+                    <input matInput formControlName="email">
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error *ngIf="loginForm.get('email').hasError('required')">
+                        <!-- {{ 'LOGIN.ERROR.REQUIRE_EMAIL' | translate}} -->
+                        <!-- Required email! -->
+                        diperlukan email
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('email').hasError('email')">
+                        <!-- {{ 'FORGOT_PASSWORD.INVALID_EMAIL' | translate}} -->
+                        <!-- Invalid email! -->
+                        email tidak valid
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>
+                        <!-- {{ 'LOGIN.PASSWORD' | translate}} -->
+                        Password
+                    </mat-label>
+                    <input matInput type="password" formControlName="password">
+                    <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                    <mat-error>
+                        <!-- {{ 'LOGIN.ERROR.REQUIRE_PASSWORD' | translate}} -->
+                        <!-- Required password! -->
+                        kata sandi diperlukan
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column"
+                    fxLayoutAlign="space-between center">
+                    <mat-checkbox class="remember-me" aria-label="Remember Me">
+                        <!-- {{ 'LOGIN.REMEMEBER_ME' | translate}} -->
+                        <!-- Remember Me -->
+                        Ingat Saya
+                    </mat-checkbox>
+
+                    <a class="forgot-password" [routerLink]="'/authentication/forgot-password'">
+                        <!-- {{ 'LOGIN.FORGOT_PASSWORD' | translate}} -->
+                        <!-- Forgot password? -->
+                        Lupa password?
+                    </a>
+                </div>
+
+                <button mat-raised-button color="accent" class="submit-button" aria-label="LOGIN"
+                    [disabled]="loginForm.invalid">
+                    <!-- {{ 'LOGIN.LOGIN' | translate | uppercase}} -->
+                    <!-- Sign in -->
+                    Masuk
+                </button>
+
+            </form>
+
+            <!-- <div class="separator">
+                <span class="text">{{ 'LOGIN.OR' | translate}}</span>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="start center">
+
+                <button mat-raised-button class="google">
+                    {{ 'LOGIN.LOGIN_WITH_GOOGLE' | translate}}
+                </button>
+
+                <button mat-raised-button class="facebook">
+                    {{ 'LOGIN.LOGIN_WITH_FACEBOOK' | translate}}
+                </button>
+
+            </div> -->
+
+            <div class="register" fxLayout="column" fxLayoutAlign="center center">
+                <span class="text">
+                    <!-- {{ 'LOGIN.EXIST_ACCOUNT' | translate}} -->
+                    <!-- Don't have a Moka account? -->
+                    Belum punya akun?
+                </span>
+                <a class="link" [routerLink]="'/authentication/register'">
+                    <!-- {{ 'LOGIN.CREATE_ACCOUNT' | translate}} -->
+                    <!-- Sign up -->
+                    Buat akun
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

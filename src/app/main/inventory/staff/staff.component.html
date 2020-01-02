@@ -1,0 +1,105 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="0px" class="w-100-p m-16">
+    <!-- HEADER -->
+    <div class="staff-header" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+        fxLayoutAlign.gt-sm="space-between center">
+
+        <!-- SEARCH -->
+        <div class="search-wrapper mx-32 mx-md-0">
+            <div class="search">
+                <mat-icon>search</mat-icon>
+                <input (keyup.enter)="applyFilter($event.target.value)" placeholder="Search for staff">
+            </div>
+        </div>
+        <!-- / SEARCH -->
+
+        <div>
+            <!-- CSV BUTTON -->
+            <button mat-raised-button class="mr-12" color="accent" (click)="downloadCSV()">
+                <mat-icon>print</mat-icon>
+                Download CSV
+            </button>
+            <!-- / CSV BUTTON -->
+
+
+            <!-- ADD BUTTON -->
+            <button mat-raised-button color="accent" (click)="doAddNewStaff()">
+                <mat-icon>add</mat-icon>
+                Tambah Karyawan
+            </button>
+            <!-- / ADD BUTTON -->
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+    <div fxLayoutAlign="center center" fxLayoutGap="0px">
+        <div class="w-100-p">
+            <table mat-table matSort [dataSource]="dataSourceForAccepted" class="w-100-p mt-16">
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nama </th>
+                    <td mat-cell *matCellDef="let element" [ngClass]="{'td-me': element.email === currentUser.email}">
+                        {{element.name}} </td>
+                </ng-container>
+
+                <!-- Email Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                    <td mat-cell *matCellDef="let element" [ngClass]="{'td-me': element.email === currentUser.email}">
+                        {{element.email}} </td>
+                </ng-container>
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status undangan </th>
+                    <td mat-cell *matCellDef="let element" [ngClass]="{'td-me': element.email === currentUser.email}">
+                        <span class="px-12 py-4 green-500" [ngClass]="{
+                                'green-500': element.status === 'accepted',
+                                'ss-display-none': element.status === 'myself', 
+                                'orange-500': element.status === 'invited'
+                            }">
+                            {{element.status_inr}}
+                        </span>
+                        <!-- <span class="px-12 py-4 green-500" *ngIf="element.status === 'accepted'">
+                            Diterima
+                        </span>
+                        <span class="px-12 py-4 ss-display-none" *ngIf="element.status === 'myself'">
+                        </span> -->
+                        <!-- <span class="px-12 py-4 orange-500" *ngIf="element.status === 'invited'">
+                            Sedang diundang
+                        </span> -->
+                    </td>
+                </ng-container>
+
+                <!-- Action Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Aksi </th>
+                    <td mat-cell *matCellDef="let element" [ngClass]="{'td-me': element.email === currentUser.email}">
+                        <!-- <button mat-button (click)="doRemoveConfirm(element.id)" color="accent"
+                            *ngIf="element.status === 'accepted'">Remove</button> -->
+                        <button mat-button (click)="doRemoveConfirm(element.id)" color="accent"
+                            *ngIf="element.status === 'accepted'">Hapus</button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnAccepted"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnAccepted;"></tr>
+            </table>
+
+            <!-- <div class="w-p-100 ss-empty-staff py-20"
+                *ngIf="(dataSourceForAccepted.filteredData.length === 1 && dataSourceForAccepted.filteredData[0].email === currentUser.email) || dataSourceForAccepted.filteredData.length === 0"> -->
+            <div class="w-p-100 ss-empty-staff py-20" *ngIf="dataSourceForAccepted.filteredData.length === 0">
+                <mat-icon class="s-56">announcement</mat-icon>
+                <span class="font-size-20 ml-20">
+                    <!-- You don't have any staff yet! -->
+                    Anda tidak memiliki karyawan!
+                </span>
+            </div>
+
+            <mat-paginator #staffPaginator [pageSize]="10" [pageSizeOptions]="pageSizeOptions">
+                <!-- <mat-paginator #staffPaginator [length]="100" [pageSize]="10" [pageSizeOptions]="pageSizeOptions"
+                (page)="changeAcceptedPagination($event)"> -->
+            </mat-paginator>
+        </div>
+    </div>
+</div>
